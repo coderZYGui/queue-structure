@@ -32,7 +32,7 @@ public class CircleQueue<E> {
     public void enQueue(E element) {
         ensureCapacity(size + 1);
         // 计算出入队的实际位置
-        elements[(front + size) % elements.length] = element;
+        elements[index(size)] = element;
         size++;
     }
 
@@ -41,7 +41,7 @@ public class CircleQueue<E> {
         E frontElement = elements[front];
         elements[front] = null;
         //front++; // 需要计算front的位置,不然会指向最后不存在的位置
-        front = (front + 1) % elements.length;
+        front = index(1);
         size--;
         return frontElement;
     }
@@ -64,12 +64,22 @@ public class CircleQueue<E> {
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         E[] newElements = (E[]) new Object[newCapacity];
         for (int i = 0; i < size; i++) {
-            newElements[i] = elements[(i + front) % elements.length];
+            newElements[i] = elements[index(i)];
         }
         elements = newElements;
 
         // 重置front
         front = 0;
+    }
+
+    /**
+     * 将之前的索引转换到现在循环数组的真实索引
+     *
+     * @param index
+     * @return
+     */
+    private int index(int index) {
+        return (front + index) % elements.length;
     }
 
     @Override
