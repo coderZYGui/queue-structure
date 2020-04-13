@@ -23,6 +23,12 @@ public class Main {
         }
         System.out.println(queue);
 
+        // 15, 16, 17, 18, 19, 5, 6, 7, 8, 9
+        for (int i = 15; i < 23; i++) {
+            queue.enQueue(i);
+        }
+        System.out.println(queue);
+
         while (!queue.isEmpty()) {
             System.out.print(queue.deQueue() + " ");
         }
