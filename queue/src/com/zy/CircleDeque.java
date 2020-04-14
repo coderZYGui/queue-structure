@@ -106,7 +106,8 @@ public class CircleDeque<E> {
         index += front;
         if (index < 0)
             return index + elements.length;
-        return index % elements.length;
+        //return index % elements.length;
+        return index - (index >= elements.length ? elements.length : 0);
     }
 
     @Override

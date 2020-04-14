@@ -79,7 +79,10 @@ public class CircleQueue<E> {
      * @return
      */
     private int index(int index) {
-        return (front + index) % elements.length;
+        //return (front + index) % elements.length;
+
+        index += front;
+        return index - (index >= elements.length ? elements.length : 0);
     }
 
     @Override
